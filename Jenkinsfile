@@ -50,6 +50,13 @@ pipeline {
                     }
                }      
             }
-        }      
+        }    
+        stage('Monitoring with Prometheus & Grafana') {
+           steps {
+                sh "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
+                sh "helm repo update"
+                sh "helm install my-kube-prometheus-stack prometheus-community/kube-prometheus-stack"
+            }
+        }
     }
 }
